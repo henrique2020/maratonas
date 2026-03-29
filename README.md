@@ -1,6 +1,6 @@
 # Resolução de questões
 
-Este repositório se trata de um histórico de todas as questões reolvidas/tentadas dentro da plataforma do [Beecrowd](https://judge.beecrowd.com).
+Este repositório trata-se de um histórico de questões resolvidas/tentadas dentro da plataforma do [Beecrowd](https://judge.beecrowd.com).
 
 ### Site
 
