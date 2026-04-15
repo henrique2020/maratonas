@@ -4,7 +4,7 @@ Este repositório trata-se de um histórico de questões resolvidas/tentadas den
 
 ### Site
 
-Para facilitar a busca e acesso a diversas questões pode-se acessar o [projeto](https://henrique2020.github.io/code-x/ "Site: Code-X").
+Para facilitar a busca e acesso a diversas questões pode-se acessar o [projeto code-x](https://henrique2020.github.io/code-x/ "Site: Code-X").
 
 
 # Tempos e configurações
