@@ -1,23 +1,21 @@
 // Problema: 1759 - Ho Ho Ho | Resposta: Accepted
-// Linguagem: Java 19 [+2s]  | Tempo: 2.039s
+// Linguagem: Java 19 [+2s]  | Tempo: 0.066s
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Scanner;
- 
+import java.io.InputStreamReader;
+
 public class Main {
- 
-    public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int rep = Integer.parseInt(br.readLine());
 
-        String ho = "Ho";
-        int rep = sc.nextInt();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i < rep; i++) { sb.append("Ho "); }
+        sb.append("Ho!");
 
-        for (int i = 1; i < rep; i++) {
-            System.out.print(ho + " ");
-        }
+        System.out.println(sb.toString());
         
-        System.out.println(ho + "!");
-
-        sc.close();
+        br.close();
     }
 }
