@@ -1,19 +1,6 @@
 <?php
-// Problema: 1028 - Figurinhas  | Resposta: Time limit exceeded
-// Linguagem: PHP (8.1.2) [+1s] | Tempo: 2.000s
-
-function GCD($a, $b) {
-    $menor = min($a, $b);
-    $gcd = 1;
-
-    for ($i = 1; $i <= $menor; $i++) {
-        if ($a % $i === 0 && $b % $i === 0) {
-            $gcd = $i;
-        }
-    }
-
-    return $gcd;
-}
+// Problema: 1028 - Figurinhas  | Resposta: Runtime error
+// Linguagem: PHP (8.1.2) [+1s] | Tempo: 0.178s
 
 $casos = intval(trim(fgets(STDIN)));
 
@@ -23,6 +10,6 @@ for ($i = 0; $i < $casos; $i++) {
         explode(' ', trim(fgets(STDIN)))
     );
 
-    echo GCD(...$entrada) . PHP_EOL;
+    echo (int) gmp_gcd($entrada[0], $entrada[1]) . PHP_EOL;
 }
 ?>
