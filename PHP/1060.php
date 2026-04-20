@@ -1,6 +1,6 @@
 <?php
-// Problema: 1060 - Números Pares | Resposta: Accepted
-// Linguagem: PHP (7.4.3) [+1s]   | Tempo: 0.093s
+// Problema: 1060 - Números Positivos | Resposta: Accepted
+// Linguagem: PHP (7.4.3) [+1s]       | Tempo: 0.093s
 
 $input = stream_get_contents(STDIN);
 $numbers = array_map('intval', explode("\n", trim($input)));
