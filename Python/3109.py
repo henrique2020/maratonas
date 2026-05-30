@@ -1,41 +1,22 @@
-# 35% X
-func = int(input())
-mesa = []
-for x in range(func):
-    mesa.append(x+1)
+# Problema: 3109 - Trocando de Mesa | Resposta: Accepted
+# Linguagem: Python 3.11 [+1s]      | Tempo: 0.332s
 
-rep = int(input())
-while rep:
-    event = list(map(int, input().split()))
-    if event[0] == 1:
-        pos1 = mesa.index(event[1])
-        pos2 = mesa.index(event[2])
-        mesa[pos1] = event[2]
-        mesa[pos2] = event[1]
-    else:
-        print(mesa.index(event[1]))
-    rep-=1
+mesas = [i for i in range(int(input()) + 1)]
+updates = []
+for _ in range(int(input())):
+    evento = list(map(int, input().split()))
     
-
-## Um caminho pra solução
-func = int(input())
-mesa = {}
-for x in range(func):
-    mesa[x+1] = 0
-
-rep = int(input())
-while rep:
-    event = list(map(int, input().split()))
-    if event[0] == 1:
-        calc = len(mesa) - abs(event[1]-event[2]) + mesa[event[1]]
-        print(mesa)
-        print(mesa[event[1]])
-        print(calc)
-        mesa[event[1]] = calc
-        mesa[event[2]] = calc
-        print(mesa)
-    else:
-        print(mesa[event[1]])
-    rep-=1
-
-    
+    if evento[0] == 1: # Evento de update
+        f1, f2 = evento[1::]
+        mesas[f1], mesas[f2] = mesas[f2], mesas[f1]
+        
+    else: # Evento de consulta
+        f = evento[1]
+        redirecionamentos = 0
+        atual = f
+        
+        while mesas[atual] != f:
+            redirecionamentos += 1
+            atual = mesas[atual]
+            
+        print(redirecionamentos)
