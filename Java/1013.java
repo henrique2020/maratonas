@@ -1,0 +1,21 @@
+// Problema: 1013 - O Maior | Resposta: Accepted
+// Linguagem: Java 19 [+2s] | Tempo: 0.096s
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+
+        String[] valores = in.readLine().split(" ");
+        int a = Integer.parseInt(valores[0]);
+        int b = Integer.parseInt(valores[1]);
+        int c = Integer.parseInt(valores[2]);
+
+        int maior = Math.max(a, Math.max(b, c));
+        System.out.printf("%d eh o maior%n", maior);
+    }
+}
