@@ -2,42 +2,44 @@
 # Linguagem: Python 3.11 [+1s]         | Tempo: 14.000s
 
 import sys
+from itertools import accumulate, chain
+from operator import sub
 
-def kadane(arr):
-    if not arr: return 0
-    max_total = max_atual = arr[0]
-    for i in range(1, len(arr)):
-        max_atual = max(arr[i], max_atual + arr[i])
-        max_total = max(max_total, max_atual)
-    return max_total
-
-tokens = sys.stdin.read().split()
-it = iter(tokens)
+it = iter(map(int, sys.stdin.read().split()))
 while True:
-    try: n_str = next(it)
+    try: N = next(it)
     except StopIteration: break
         
-    N = int(n_str)
-    if N <= 0: continue
-        
-    # LEITURA BLINDADA DA MATRIZ
+    # Monta a matriz original
     grid = []
     for _ in range(N):
-        linha = []
-        for _ in range(N):
-            # Puxa exatamente N números, não importa em qual linha estejam no arquivo
-            linha.append(int(next(it)))
-        grid.append(linha)
+        grid.append([next(it) for _ in range(N)])
         
-    max_sub_rect_sum = -float('inf')
+    # 1. Precomputação das somas de prefixos por linha (Horizontal Prefix Sum)
+    # P[r][c] guardará a soma da linha 'r' até a coluna 'c'
+    P = [[0] + list(accumulate(row)) for row in grid]
+    
+    # Rotaciona a matriz de prefixos para acesso colunar em O(1)
+    # Isso gera tuplas, que são mais rápidas para iteração do que listas
+    P_cols = list(zip(*P))
+    
+    max_sub_rect = -10**15
+    
     for c1 in range(N):
-        temp_row_sums = [0] * N
-        
+        col1 = P_cols[c1]
         for c2 in range(c1, N):
-            for i in range(N):
-                temp_row_sums[i] += grid[i][c2]
-
-            current_max_sum = kadane(temp_row_sums)
-            max_sub_rect_sum = max(max_sub_rect_sum, current_max_sum)
+            col2 = P_cols[c2+1]
             
-    print(max_sub_rect_sum)
+            # 2. Obtém a soma das linhas no intervalo [c1, c2] usando C interno (map)
+            # E imediatamente calcula o prefix sum vertical (accumulate)
+            pref = list(accumulate(map(sub, col2, col1)))
+            
+            # 3. Kadane Vetorizado em C:
+            # Subtrai do prefixo atual o menor prefixo anterior.
+            # Tudo isso ocorre no backend do Python, sem loops no bytecode.
+            current_max = max(map(sub, pref, accumulate(chain([0], pref), min)))
+            
+            if current_max > max_sub_rect:
+                max_sub_rect = current_max
+                
+    print(max_sub_rect)
