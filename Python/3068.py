@@ -1,35 +1,30 @@
-# Problema: 3068 - Meteoros    | Resposta: Time limit exceeded
-# Linguagem: Python 3.11 [+1s] | Tempo: 2.000s
+# Problema: 3068 - Meteoros    | Resposta: Accepted
+# Linguagem: Python 3.11 [+1s] | Tempo: 0.423s
 
-class Coordenadas():
-    def __init__(self, x: int, y: int):
-        self.x = x
-        self.y = y
+import sys
 
-class Fazenda():
-    def __init__(self, ini: Coordenadas, fim: Coordenadas):
-        self.localizacao = tuple((i, j) for i in range(ini.x, fim.x + 1) for j in range(fim.y, ini.y + 1))
-        
-    def acerto(self, meteoro: Coordenadas):
-        return (meteoro.x, meteoro.y) in self.localizacao
+it = iter(sys.stdin.read().splitlines())
 
-caso = 1;
+saidas = []
+caso = 1
 while True:
-    pontos = list(map(int, input().split()))
-    if(sum(pontos) == 0): break
+    try: linha = next(it)
+    except StopIteration: break
+
+    f_x1, f_y1, f_x2, f_y2 = map(int, linha.split())
     
-    f = Fazenda(
-        Coordenadas(pontos[0], pontos[1]), 
-        Coordenadas(pontos[2], pontos[3])
-    )
+    if f_x1 == 0 and f_y1 == 0 and f_x2 == 0 and f_y2 == 0: 
+        break
     
     acertos = 0
-    for _ in range(int(input())):
-        meteoro = Coordenadas(*list(map(int, input().split())))
-        if f.acerto(meteoro):
+    for _ in range(int(next(it))):
+        m_x, m_y = map(int, next(it).split())
+        if f_x1 <= m_x <= f_x2 and f_y2 <= m_y <= f_y1:
             acertos += 1
     
-    print(f"Teste {caso}")
-    print(f"{acertos}")
+    saidas.append(f"Teste {caso}")
+    saidas.append(str(acertos))
     
     caso += 1
+        
+sys.stdout.write("\n".join(saidas) + "\n")
